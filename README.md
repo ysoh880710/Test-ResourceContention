@@ -2,19 +2,18 @@
 
 ## Purpose
 
-- To verify and measure how [resource contention](https://en.wikipedia.org/wiki/Resource_contention) affects [shared resource](https://en.wikipedia.org/wiki/Shared_resource) access frequency. ([Resource contention](https://en.wikipedia.org/wiki/Resource_contention))
-- To verify and measure how '[resource contention](https://en.wikipedia.org/wiki/Resource_contention) resolving mechanisms' affects [shared resource](https://en.wikipedia.org/wiki/Shared_resource) access frequency. ([Resource contention](https://en.wikipedia.org/wiki/Resource_contention) resolving mechanism)
-- To verify and measure reduction of [resource contention](https://en.wikipedia.org/wiki/Resource_contention) by 'assigning a [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing))'. (Reduction of [resource contention](https://en.wikipedia.org/wiki/Resource_contention))
+- To verify and measure how [resource contention](https://en.wikipedia.org/wiki/Resource_contention) affects [shared resource](https://en.wikipedia.org/wiki/Shared_resource) access iteration count over same amount of time(= 3 seconds). ([Resource contention](https://en.wikipedia.org/wiki/Resource_contention))
+- To verify and measure how '[resource contention](https://en.wikipedia.org/wiki/Resource_contention) resolving mechanisms' affects [shared resource](https://en.wikipedia.org/wiki/Shared_resource) access iteration count over same amount of time(= 3 seconds). ([Resource contention](https://en.wikipedia.org/wiki/Resource_contention) resolving mechanism)
+- To verify and measure reduction of [resource contention](https://en.wikipedia.org/wiki/Resource_contention) by 'assigning 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing))'. (Reduction of [resource contention](https://en.wikipedia.org/wiki/Resource_contention))
 
 ### '[Resource contention](https://en.wikipedia.org/wiki/Resource_contention) resolving mechanisms'
 
 - [Lock](https://en.wikipedia.org/wiki/Lock_(computer_science)) (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access))
 - [Critical section](https://en.wikipedia.org/wiki/Critical_section)
 
-### 'Assigning a [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing))'
+### 'Assigning 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing))'
 
-- Reduction of [resource contention](https://en.wikipedia.org/wiki/Resource_contention) from 'minimum of 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)), maximum of 9 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over access to 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource)' to 'minimum of 1 [thread](https://en.wikipedia.org/wiki/Thread_(computing)), maximum of 2 [thread](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over access to 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource)' is expected.
-- Resulting the increase of access frequency of [shared resources](https://en.wikipedia.org/wiki/Shared_resource).
+- Reduction of [resource contention](https://en.wikipedia.org/wiki/Resource_contention) from 'minimum of 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)), maximum of 9 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over access to 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource)' to 'minimum of 1 [thread](https://en.wikipedia.org/wiki/Thread_(computing)), maximum of 2 [thread](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over access to 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource)'.
 
 ## Requirement
 
@@ -23,11 +22,11 @@
 
 ## Restriction
 
-- [Threads](https://en.wikipedia.org/wiki/Thread_(computing)) count fixed to 8.
+- [Thread](https://en.wikipedia.org/wiki/Thread_(computing)) count is fixed to 8.
 
 ## Result
 
-### [Threads](https://en.wikipedia.org/wiki/Thread_(computing)) access frequency of non [shared resource](https://en.wikipedia.org/wiki/Shared_resource) (local variable)
+### Iteration count of 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) accessing non [shared resource](https://en.wikipedia.org/wiki/Shared_resource) (local variable) over same amount of time(= 3 seconds)
 ![NonSharedResource0](NonSharedResource0_edit.png)
 ![NonSharedResource1](NonSharedResource1_edit.png)
 ![NonSharedResource2](NonSharedResource2_edit.png)
@@ -37,54 +36,55 @@
 ![NonSharedResource6](NonSharedResource6_edit.png)
 ![NonSharedResource7](NonSharedResource7_edit.png)
 
-- Average access frequency of non [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) for 3 seconds : **2246624495** (17972995963 / 8 = 2246624495.375)
+- Average iteration count : **2246624495** (17972995963 / 8 = 2246624495.375)
 
-### [Threads](https://en.wikipedia.org/wiki/Thread_(computing)) access frequency of [shared resource](https://en.wikipedia.org/wiki/Shared_resource) by lock (8 threads to 1 shared resource)
+### Iteration count of 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over access to 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) over same amount of time(= 3 seconds) by [lock](https://en.wikipedia.org/wiki/Lock_(computer_science)) (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access))
 
 ![Lock0](Lock0_edit.png)
 
-- Access frequency of [shared resource](https://en.wikipedia.org/wiki/Shared_resource) for 3 seconds : **15729828**
+- Iteration count : **15729828**
 
-### [Threads](https://en.wikipedia.org/wiki/Thread_(computing)) access frequency of [shared resource](https://en.wikipedia.org/wiki/Shared_resource) by critical section (8 threads to 1 shared resource)
+### Iteration count of 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over access to 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) over same amount of time(= 3 seconds) by [Critical section](https://en.wikipedia.org/wiki/Critical_section)
 
 ![CriticalSection0](CriticalSection0_edit.png)
 
-- Access frequency of [shared resource](https://en.wikipedia.org/wiki/Shared_resource) for 3 seconds : **11937905**
+- Iteration count : **11937905**
 
-### [Threads](https://en.wikipedia.org/wiki/Thread_(computing)) access frequency of a [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) by lock (1 thread to 1 shared resource)
+### Iteration count of 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) over same amount of time(= 3 seconds) by [lock](https://en.wikipedia.org/wiki/Lock_(computer_science)) (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access))
 
 ![Lock_ThreadResource](Lock_ThreadResource_edit.png)
 
-- Average access frequency of [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) for 3 seconds : **194424288** (1547394305 / 8 = 194424288.125)
+- Average iteration count : **194424288** (1547394305 / 8 = 194424288.125)
 
-### [Threads](https://en.wikipedia.org/wiki/Thread_(computing)) access frequency of a [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) by critical section (1 thread to 1 shared resource)
+### Iteration count of 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) over same amount of time(= 3 seconds) by [critical section](https://en.wikipedia.org/wiki/Critical_section)
 
 ![CriticalSection_ThreadResource](CriticalSection_ThreadResource_edit.png)
 
-- Average access frequency of [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) for 3 seconds : **177813038** (1422504303 / 8 = 177813037.875)
+- Average iteration count : **177813038** (1422504303 / 8 = 177813037.875)
 
 ## Summary
 
-|Case|Thread count|Shared resource count|[Resource contention](https://en.wikipedia.org/wiki/Resource_contention) resolving mechanisms|Access frequency|
-|---|---|---|---|---|
-|Non shared resource|8|0|None|2246624495|
-|8 threads 1 shared resource|8|1|Lock|15729828|
-|8 threads 1 shared resource|8|1|Critical section|11937905|
-|8 threads each shared resource|8|8|Lock|194424288|
-|8 threads each shared resource|8|8|Critical section|177813038|
+|Case|[Resource contention](https://en.wikipedia.org/wiki/Resource_contention) resolving mechanism|Iteration count|
+|---|---|---|
+|8 threads accessing non [shared resource](https://en.wikipedia.org/wiki/Shared_resource)|None|2246624495|
+|8 threads conflicting over access to 1 shared resource|[Lock](https://en.wikipedia.org/wiki/Lock_(computer_science)) (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access))|15729828|
+|8 threads conflicting over access to 1 shared resource|[Critical section](https://en.wikipedia.org/wiki/Critical_section)|11937905|
+|8 threads having each [shared resource](https://en.wikipedia.org/wiki/Shared_resource)|[Lock](https://en.wikipedia.org/wiki/Lock_(computer_science)) (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access))|194424288|
+|8 threads having each [shared resource](https://en.wikipedia.org/wiki/Shared_resource)|[Critical section](https://en.wikipedia.org/wiki/Critical_section)|177813038|
 
-### 
-- Compared to access frequency of non shared resource (2246624495), access frequency of 1 shared resource by lock (15729828) was significantly small (0.70%).
-- Compared to access frequency of non shared resource (2246624495), access frequency of 1 shared resource by critical section (11937905) was even smaller (0.53%).
-- Compared to access frequency of non shared resource (2246624495), access frequency of shared resource per thread by lock (194424288) was small (8.65%).
-- Compared to access frequency of non shared resource (2246624495), access frequency of shared resource per thread by critical section (177813038) was even smaller (7.91%).
+### 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) vs '1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing))'
+- Iteration count of 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) by **[lock](https://en.wikipedia.org/wiki/Lock_(computer_science))** (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)) (**194424288**) was **1236.02%** of iteration count of 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) by **[lock](https://en.wikipedia.org/wiki/Lock_(computer_science))** (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)) (**15729828**).
+- Iteration count of 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) by **[critical section](https://en.wikipedia.org/wiki/Critical_section)** (**177813038**) was **1489.48%** of iteration count of 8 [threads](https://en.wikipedia.org/wiki/Thread_(computing)) conflicting over 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) by **[critical section](https://en.wikipedia.org/wiki/Critical_section)** (**11937905**).
 
-- Compared to access frequency of 1 shared resource by lock (15729828), access frequency of shared resource per thread by lock (194424288) was significantly greater (1236.02%).
-- Compared to access frequency of 1 shared resource by critical section (11937905), access frequency of shared resource per thread by critical section (177813038) was significantly greater (1489.48%).
-
-- Compared to access frequency of shared resource per thread by critical section (11937905), access frequency of shared resource per thread by critical section (177813038) was significantly greater (1489.48%).
+### Lock vs Critical section
+- Iteration count of 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) by **[lock](https://en.wikipedia.org/wiki/Lock_(computer_science))** (using [Interlocked API](https://docs.microsoft.com/en-us/windows/win32/sync/interlocked-variable-access)) (**194424288**) was **109.34%** of iteration count of 1 [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) by **[critical section](https://en.wikipedia.org/wiki/Critical_section)** (**177813038**).
 
 ## Note
 
-- [False sharing](https://en.wikipedia.org/wiki/False_sharing) causes significant degradation of performance if [shared resources](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) is not aligned.
-- Therefore, each [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) is aligned to cache line(64) and never accessed by other threads except owner [thread](https://en.wikipedia.org/wiki/Thread_(computing)).
+- [False sharing](https://en.wikipedia.org/wiki/False_sharing) causes significant degradation of performance if the [shared resources](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) is located in same cache block, and two or more cores are accessing the [shared resource](https://en.wikipedia.org/wiki/Shared_resource), eventually leading to cache reload due to [cache coherence](https://en.wikipedia.org/wiki/Cache_coherence).
+- Therefore, each [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) is aligned to cache line(64) using [alignas specifier](https://en.cppreference.com/w/cpp/language/alignas) and never accessed by other [threads](https://en.wikipedia.org/wiki/Thread_(computing)).
+
+![ThreadResource_Addresses_Lock](Lock_ThreadResource_Addresses_edit.png)
+![ThreadResource_Addresses_CriticalSection](CriticalSection_ThreadResource_Addresses_edit.png)
+
+- The address of each [shared resource](https://en.wikipedia.org/wiki/Shared_resource) per [thread](https://en.wikipedia.org/wiki/Thread_(computing)) is aligned to 64 byte showing multiple of 64.
